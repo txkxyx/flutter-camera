@@ -20,21 +20,24 @@ class MultiCameraState extends State<MultiCameraHome> {
   void initState() {
     super.initState();
 
+    // camera Pluginで、端末の利用可能なカメラを取得する
     availableCameras().then((availableCameras) {
       cameras = availableCameras;
 
+      // 使用するカメラを初期化する
       if (cameras.length > 0) {
         setState(() {
           selectedCameraIndex = 0;
         });
       }
-
       _initCameraController(cameras[selectedCameraIndex]);
     });
   }
 
-  Future<void> _initCameraController(
-      CameraDescription cameraDescription) async {
+  /**
+   * 
+   */
+  Future<void> _initCameraController(CameraDescription cameraDescription) async {
     if (_cameraController != null) {
       await _cameraController.dispose();
     }
@@ -105,7 +108,6 @@ class MultiCameraState extends State<MultiCameraHome> {
                         icon: const Icon(Icons.camera),
                         onPressed: () async {
                           try {
-                            // await _cameraController.initialize();
 
                             final path = join(
                                 (await getTemporaryDirectory()).path,

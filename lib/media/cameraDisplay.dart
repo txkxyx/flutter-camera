@@ -1,9 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:path/path.dart';
 import 'dart:io';
 
-import 'package:path_provider/path_provider.dart';
+import 'package:flutter/material.dart';
 
 class CameraDisplay extends StatelessWidget {
   final String imgPath;
@@ -22,8 +19,15 @@ class CameraDisplay extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.save_alt),
         onPressed: () async {
-          final result = await ImageGallerySaver.saveImage(await File(imgPath).readAsBytes());
-          print(result);
+          // final path = join((await getApplicationDocumentsDirectory()).path,'${DateTime.now()}.png');
+          // File saveImage = File(path);
+          // var savedImage = await saveImage.writeAsBytes(await File(imgPath).readAsBytes());
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //   builder: (context) =>
+          //       CameraDisplay(imgPath: path),
+          //   fullscreenDialog: true));
         },
       ),
 
