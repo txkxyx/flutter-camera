@@ -17,7 +17,7 @@ class _VideoDisplayState extends State<VideoDisplay> {
   VoidCallback videoPlayerListener;
 
   @override
-  void initState() async{
+  void initState(){
     print(widget.videoPath);
     _videoPlayerController = VideoPlayerController.file(File(widget.videoPath));
 
@@ -30,8 +30,7 @@ class _VideoDisplayState extends State<VideoDisplay> {
 
     _videoPlayerController.addListener(videoPlayerListener);
 
-    await _videoPlayerController.setLooping(true);
-    await _videoPlayerController.initialize();
+    _videoPlayerController.initialize();
     super.initState();
   }
 

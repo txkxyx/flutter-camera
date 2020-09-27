@@ -34,9 +34,6 @@ class MultiCameraState extends State<MultiCameraHome> {
     });
   }
 
-  /**
-   * 
-   */
   Future<void> _initCameraController(CameraDescription cameraDescription) async {
     if (_cameraController != null) {
       await _cameraController.dispose();
@@ -73,61 +70,60 @@ class MultiCameraState extends State<MultiCameraHome> {
   Icon _getReserseCameraIcon() {
     if (_cameraController == null) return const Icon(Icons.camera_rear);
     CameraLensDirection lensDirection =
-        _cameraController.description.lensDirection;
+      _cameraController.description.lensDirection;
 
     return lensDirection == CameraLensDirection.front
-        ? const Icon(Icons.camera_rear)
-        : const Icon(Icons.camera_front);
+      ? const Icon(Icons.camera_rear)
+      : const Icon(Icons.camera_front);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text(''),
-        ),
-        body: Column(
-          children: [
-            Expanded(
-              child: _cameraPreviewWidget(),
-            ),
-            Container(
-                alignment: Alignment.center,
-                height: 100,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    IconButton(
-                        icon: _getReserseCameraIcon(),
-                        onPressed: () {
-                          selectedCameraIndex =
-                              selectedCameraIndex == 1 ? 0 : 1;
-                          _initCameraController(cameras[selectedCameraIndex]);
-                        }),
-                    IconButton(
-                        icon: const Icon(Icons.camera),
-                        onPressed: () async {
-                          try {
+      appBar: AppBar(
+        title: const Text(''),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: _cameraPreviewWidget(),
+          ),
+          Container(
+            alignment: Alignment.center,
+            height: 100,
+            child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              IconButton(
+                icon: _getReserseCameraIcon(),
+                onPressed: () {
+                  selectedCameraIndex = selectedCameraIndex == 1 ? 0 : 1;
+                  _initCameraController(cameras[selectedCameraIndex]);
+                }),
+              IconButton(
+                icon: const Icon(Icons.camera),
+                onPressed: () async {
+                  try {
+                    final path = join(
+                      (await getApplicationDocumentsDirectory()).path,
+                      '${DateTime.now()}.png');
 
-                            final path = join(
-                                (await getTemporaryDirectory()).path,
-                                '${DateTime.now()}.png');
+                    await _cameraController.takePicture(path);
 
-                            await _cameraController.takePicture(path);
-
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        CameraDisplay(imgPath: path),
-                                    fullscreenDialog: true));
-                          } catch (e) {
-                            print(e);
-                          }
-                        }),
-                  ],
-                ))
-          ],
-        ));
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                          CameraDisplay(imgPath: path),
+                          fullscreenDialog: true));
+                  } catch (e) {
+                    print(e);
+                  }
+                }),
+            ],
+          ))
+        ],
+      )
+    );
   }
 }

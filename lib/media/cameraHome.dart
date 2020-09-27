@@ -54,35 +54,35 @@ class CameraHomeState extends State<CameraHome> {
       appBar: AppBar(
         title: const Text(''),
       ),
+      // FutureBuilderを実装
       body: FutureBuilder<void>(
         future: _initializeCameraController,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            //
+            // カメラの初期化が完了したら、プレビューを表示
             return CameraPreview(_cameraController);
           } else {
-            //
+            // カメラの初期化中はインジケーターを表示
             return const Center(child: CircularProgressIndicator());
           }
         },
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.camera_alt),
-        //
+        // ボタンが押下された際の処理
         onPressed: () async {
           try {
-            //
-            await _initializeCameraController;
 
+            // 画像を保存するパスを作成する
             final path = join(
-              (await getTemporaryDirectory()).path,
+              (await getApplicationDocumentsDirectory()).path,
               '${DateTime.now()}.png',
             );
 
-            //
+            // カメラで画像を撮影する
             await _cameraController.takePicture(path);
 
-            //
+            // 画像を表示する画面に遷移
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -90,7 +90,6 @@ class CameraHomeState extends State<CameraHome> {
               ),
             );
           } catch (e) {
-            //
             print(e);
           }
         },

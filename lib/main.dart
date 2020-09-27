@@ -1,4 +1,5 @@
 import 'package:camera/camera.dart';
+import 'package:camera_app/media/cameraHome.dart';
 import 'package:camera_app/media/multiCameraHome.dart';
 import 'package:camera_app/media/videoHome.dart';
 import 'package:flutter/material.dart';
@@ -47,6 +48,13 @@ class MyHomePage extends StatelessWidget {
       body: Wrap(
         children: [
           RaisedButton(
+              child: const Text('Camera'),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return CameraHome(camera: camera,);
+                }));
+              }),
+          RaisedButton(
               child: const Text('Multi Camera'),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -65,3 +73,4 @@ class MyHomePage extends StatelessWidget {
     );
   }
 }
+

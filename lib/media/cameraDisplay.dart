@@ -15,22 +15,7 @@ class CameraDisplay extends StatelessWidget {
       ),
       body: Column(
         children: [Expanded(child: Image.file(File(imgPath)))],
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.save_alt),
-        onPressed: () async {
-          // final path = join((await getApplicationDocumentsDirectory()).path,'${DateTime.now()}.png');
-          // File saveImage = File(path);
-          // var savedImage = await saveImage.writeAsBytes(await File(imgPath).readAsBytes());
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //   builder: (context) =>
-          //       CameraDisplay(imgPath: path),
-          //   fullscreenDialog: true));
-        },
-      ),
-
+      )
     );
   }
 }
