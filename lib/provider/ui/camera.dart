@@ -88,7 +88,6 @@ class CameraButton extends StatelessWidget {
           final path = join((await getApplicationDocumentsDirectory()).path,
               '${DateTime.now()}.png');
           await controller.takePicture(path);
-
           await Navigator.push(
               context,
               MaterialPageRoute(

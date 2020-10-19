@@ -13,6 +13,7 @@ class FileRepository {
   Future<List<String>> getFiles() async {
     var dirPath = await _getApplicationPath();
     var dir = Directory(dirPath);
+    if (!dir.existsSync()) dir.createSync();
     return dir.listSync().map((e) => e.path).toList();
   }
 }
