@@ -10,12 +10,9 @@ class CameraDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Picture'),
-      ),
-      body: Column(
-        children: [Expanded(child: Image.file(File(imgPath)))],
-      )
-    );
+        appBar: AppBar(
+          title: const Text('Picture'),
+        ),
+        body: Column(children: [Expanded(child: Image.file(File(imgPath)))]));
   }
 }

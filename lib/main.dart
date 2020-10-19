@@ -4,6 +4,8 @@ import 'package:camera_app/media/multiCameraHome.dart';
 import 'package:camera_app/media/videoHome.dart';
 import 'package:flutter/material.dart';
 
+import 'provider/ui/main.dart';
+
 Future<void> main() async {
   // runAppが実行される前に、cameraプラグインを初期化
   WidgetsFlutterBinding.ensureInitialized();
@@ -51,7 +53,9 @@ class MyHomePage extends StatelessWidget {
               child: const Text('Camera'),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return CameraHome(camera: camera,);
+                  return CameraHome(
+                    camera: camera,
+                  );
                 }));
               }),
           RaisedButton(
@@ -68,9 +72,16 @@ class MyHomePage extends StatelessWidget {
                   return VideoHome();
                 }));
               }),
+          RaisedButton(
+            child: const Text('Provider Camera'),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return CameraMainPage();
+              }));
+            },
+          )
         ],
       ),
     );
   }
 }
-
